@@ -8,8 +8,12 @@ export class CategoryService {
         private categoryModel: Model<CategoryDocument>,
     ) {}
 
-    async findAll(): Promise<Category[]> {
-        return this.categoryModel.find().exec();
+    async getCategories(): Promise<Category[]> {
+        return this.categoryModel.find().populate('products').exec();
+    }
+
+    async getCategoryById(categoryId: string): Promise<Category> {
+        return this.categoryModel.findById(categoryId).populate('products').exec();
     }
 
     async create(category: Category): Promise<Category> {

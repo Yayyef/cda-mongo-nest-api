@@ -7,8 +7,13 @@ export class CategoryController {
     constructor(private categoryService: CategoryService) {}
     
     @Get()
-    public async findAll(): Promise<Category[]> {
-        return await this.categoryService.findAll();
+    public async getCategories(): Promise<Category[]> {
+        return await this.categoryService.getCategories();
+    }
+
+    @Get(':id')
+    public async getCategoryById(@Param('id') id: string): Promise<Category> {
+        return await this.categoryService.getCategoryById(id);
     }
 
     @Post()
